@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginRequest, RefreshRequest, TokenResponse } from '../models/auth.model';
 import { User, UserRole } from '../models/user.model';
@@ -78,7 +78,10 @@ export class AuthService {
       return;
     }
     this.loadCurrentUser(token).subscribe({
-      error: () => this.logout(),
+      error: () => {
+        this.logout();
+        this.readySubject.next(true);
+      },
       complete: () => this.readySubject.next(true),
     });
   }
@@ -86,8 +89,7 @@ export class AuthService {
   private loadCurrentUser(accessToken: string): Observable<User> {
     const payload = decodeJwt(accessToken)!;
     return this.userService.getById(payload.userId).pipe(
-      tap((user) => this.currentUserSubject.next(user)),
-      map((user) => user)
+      tap((user) => this.currentUserSubject.next(user))
     );
   }
 
