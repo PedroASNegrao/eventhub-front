@@ -34,22 +34,27 @@ EventHub is an event management web app: users can register/login, browse and vi
 
 6. **API integration** — `environment.apiUrl` points to `http://localhost:8080/api` in development and `/api` in production, so the backend must be running and reachable at that URL for data to load.
 
-## Suggested screenshots to document the frontend
+## Screenshots
 
-To make this README more visual, capture and add screenshots (e.g. into a `docs/screenshots/` folder, referenced below) for:
+**Login page** (`/login`) — the auth form
 
-- **Login page** (`/login`) — the auth form
-- **Register page** (`/register`) — sign-up flow
-- **Event list** (`/events`) — public browsing view, ideally with a few sample events
-- **Event detail** (`/events/:id`) — single event page
-- **Event form** (`/events/new`) — logged in as an organizer, showing the create/edit form
-- **Guard behavior** — an unauthenticated user attempting `/events/new` being redirected, to illustrate the route guards
+![Login page](images/login.png)
 
-Example embed once captured:
+**Register page** (`/register`) — sign-up flow, choosing attendee or organizer
 
-```markdown
-![Event list](docs/screenshots/event-list.png)
-```
+![Register page](images/register.png)
+
+**Event list** (`/events`) — public browsing view
+
+![Event list](images/events.png)
+
+**Event detail** (`/events/:id`) — single event page
+
+![Event detail](images/events_id.png)
+
+**Event form** (`/events/new`) — logged in as an organizer, create/edit form
+
+![Event form](images/events_new.png)
 
 ## Development server
 
