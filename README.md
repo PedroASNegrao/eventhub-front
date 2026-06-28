@@ -1,6 +1,55 @@
-# EventhubFront
+# EventHub Front
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+EventHub is an event management web app: users can register/login, browse and view events, and organizers can create and manage their own events. This is the Angular frontend, generated with [Angular CLI](https://github.com/angular/angular-cli) v19.2.27 and consuming a REST API (configured via `src/environments`).
+
+## Tech stack
+
+- **Framework:** Angular 19 (standalone components, lazy-loaded routes)
+- **Language:** TypeScript 5.7
+- **Styling:** Tailwind CSS 3 + PostCSS/Autoprefixer
+- **Icons:** lucide-angular
+- **Reactive state/HTTP:** RxJS, Angular `HttpClient`
+- **Auth:** JWT access/refresh tokens, decoded client-side (`jwt.util.ts`) to derive the current user and role
+- **Testing:** Karma + Jasmine
+
+## How the app is built, step by step
+
+1. **Bootstrap & config** — [app.config.ts](src/app/app.config.ts) wires up providers (router, HTTP client with interceptors). [app.routes.ts](src/app/app.routes.ts) defines the routes, all lazy-loaded with `loadComponent`.
+
+2. **Core layer** (`src/app/core`) — cross-cutting concerns used across the app:
+   - `models/` — TypeScript interfaces mirroring the API DTOs (`User`, `Event`, `LoginRequest`, `TokenResponse`, `JwtPayload`, etc.)
+   - `services/` — `auth.service.ts` (login/register/refresh/logout), `event.service.ts` (CRUD for events), `user.service.ts`, and `jwt.util.ts` for decoding tokens
+   - `guards/` — `auth.guard.ts` (route requires a logged-in user) and `organizer.guard.ts` (route requires the `ORGANIZER` role)
+   - `interceptors/` — `auth.interceptor.ts` attaches the access token to outgoing requests and handles refresh
+
+3. **Shared layer** (`src/app/shared`) — reusable building blocks: `button`, `badge`, `spinner`, and `navbar` components, plus `validators.util.ts`, `form-errors.util.ts`, and `date.util.ts` helpers used by forms across features.
+
+4. **Feature layer** (`src/app/features`) — the actual screens:
+   - `auth/login` and `auth/register` — authentication forms
+   - `events/event-list` — public listing of events
+   - `events/event-detail` — single event view
+   - `events/event-form` — create/edit an event, restricted to authenticated organizers via the route guards
+
+5. **Routing model** — `/` redirects to `/events`. `/events` and `/events/:id` are public. `/events/new` is protected by `authGuard` + `organizerGuard`. Unknown paths redirect to `/events`.
+
+6. **API integration** — `environment.apiUrl` points to `http://localhost:8080/api` in development and `/api` in production, so the backend must be running and reachable at that URL for data to load.
+
+## Suggested screenshots to document the frontend
+
+To make this README more visual, capture and add screenshots (e.g. into a `docs/screenshots/` folder, referenced below) for:
+
+- **Login page** (`/login`) — the auth form
+- **Register page** (`/register`) — sign-up flow
+- **Event list** (`/events`) — public browsing view, ideally with a few sample events
+- **Event detail** (`/events/:id`) — single event page
+- **Event form** (`/events/new`) — logged in as an organizer, showing the create/edit form
+- **Guard behavior** — an unauthenticated user attempting `/events/new` being redirected, to illustrate the route guards
+
+Example embed once captured:
+
+```markdown
+![Event list](docs/screenshots/event-list.png)
+```
 
 ## Development server
 
@@ -10,7 +59,7 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files. Note: the backend API (default `http://localhost:8080/api`, see `src/environments/environment.ts`) must be running for data-dependent pages to work.
 
 ## Code scaffolding
 

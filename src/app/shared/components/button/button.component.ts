@@ -28,7 +28,7 @@ export class ButtonComponent {
   @Input() fullWidth = false;
 
   readonly baseClasses =
-    'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+    'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950';
 
   readonly sizeClasses: Record<ButtonSize, string> = {
     sm: 'px-3 py-1.5 text-xs',
@@ -37,10 +37,10 @@ export class ButtonComponent {
   };
 
   readonly variantClasses: Record<ButtonVariant, string> = {
-    primary: 'bg-primary-600 text-white shadow-sm hover:bg-primary-700 hover:shadow-md focus-visible:ring-primary-500',
+    primary: 'bg-brand-gradient text-white shadow-glow-sm hover:shadow-glow hover:brightness-110',
     secondary:
-      'bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:ring-gray-400 focus-visible:ring-primary-500',
-    danger: 'bg-red-600 text-white shadow-sm hover:bg-red-700 hover:shadow-md focus-visible:ring-red-500',
-    ghost: 'bg-transparent text-gray-600 hover:bg-gray-100 focus-visible:ring-primary-500',
+      'bg-white/5 text-ink-100 ring-1 ring-inset ring-white/10 hover:bg-white/10 hover:ring-white/20',
+    danger: 'bg-rose-600 text-white shadow-sm hover:bg-rose-500 hover:shadow-md',
+    ghost: 'bg-transparent text-ink-300 hover:bg-white/5 hover:text-ink-50',
   };
 }

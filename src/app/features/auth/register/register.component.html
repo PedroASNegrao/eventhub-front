@@ -1,12 +1,14 @@
 <div class="flex flex-1 items-center justify-center px-4 py-12">
   <div class="card w-full max-w-sm animate-fade-in-up p-8">
-    <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-600 text-white shadow-sm">
+    <span class="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary-600/20 blur-3xl"></span>
+
+    <span class="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-glow-sm">
       <lucide-icon [img]="UserPlusIcon" class="h-5 w-5" />
     </span>
-    <h1 class="mt-4 text-2xl font-bold tracking-tight text-gray-900">Create your account</h1>
-    <p class="mt-1 text-sm text-gray-500">Join EventHub as an attendee or organizer.</p>
+    <h1 class="relative mt-5 text-2xl font-bold tracking-tight text-ink-50">Create your account</h1>
+    <p class="relative mt-1 text-sm text-ink-300">Join EventHub as an attendee or organizer.</p>
 
-    <form [formGroup]="form" (ngSubmit)="submit()" class="mt-6 space-y-4">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="relative mt-6 space-y-4">
       <div>
         <label for="name" class="input-label">Name</label>
         <input id="name" type="text" formControlName="name" autocomplete="name" class="input-field" />
@@ -36,9 +38,9 @@
         <div class="mt-2 space-y-2">
           @for (role of roles; track role.value) {
             <label
-              class="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2.5 text-sm transition has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50"
+              class="flex cursor-pointer items-center gap-2.5 rounded-xl border border-white/10 bg-ink-950/40 px-3 py-2.5 text-sm text-ink-200 transition hover:border-white/20 has-[:checked]:border-primary-500/60 has-[:checked]:bg-primary-500/10 has-[:checked]:text-ink-50"
             >
-              <input type="radio" formControlName="role" [value]="role.value" class="h-4 w-4 accent-primary-600" />
+              <input type="radio" formControlName="role" [value]="role.value" class="h-4 w-4 accent-primary-500" />
               {{ role.label }}
             </label>
           }
@@ -52,9 +54,9 @@
       <app-button type="submit" [loading]="loading()" [fullWidth]="true">Create account</app-button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-gray-500">
+    <p class="relative mt-6 text-center text-sm text-ink-400">
       Already have an account?
-      <a routerLink="/login" class="font-semibold text-primary-600 hover:text-primary-700">Sign in</a>
+      <a routerLink="/login" class="font-semibold text-primary-300 transition hover:text-primary-200">Sign in</a>
     </p>
   </div>
 </div>

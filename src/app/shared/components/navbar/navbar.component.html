@@ -1,18 +1,21 @@
-<nav class="sticky top-0 z-10 border-b border-gray-200/80 bg-white/80 backdrop-blur-md">
+<nav class="sticky top-0 z-20 border-b border-white/[0.06] bg-ink-950/70 backdrop-blur-xl">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-    <a routerLink="/events" class="flex items-center gap-2 text-lg font-bold text-gray-900 transition hover:text-primary-700">
-      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600 text-white">
-        <lucide-icon [img]="CalendarDaysIcon" class="h-5 w-5" />
+    <a routerLink="/events" class="group flex items-center gap-2.5 text-lg font-bold tracking-tight">
+      <span
+        class="relative flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-glow-sm transition-transform duration-200 group-hover:scale-105"
+      >
+        <span class="absolute inset-0 rounded-xl bg-brand-gradient opacity-60 blur-md transition-opacity group-hover:opacity-90"></span>
+        <lucide-icon [img]="CalendarDaysIcon" class="relative h-5 w-5" />
       </span>
-      EventHub
+      <span class="text-gradient">EventHub</span>
     </a>
 
     <div class="flex items-center gap-1 sm:gap-2">
       <a
         routerLink="/events"
-        routerLinkActive="bg-primary-50 text-primary-700"
+        routerLinkActive="bg-primary-500/10 text-primary-200 ring-1 ring-inset ring-primary-500/20"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100"
+        class="rounded-lg px-3 py-2 text-sm font-medium text-ink-300 transition hover:bg-white/5 hover:text-ink-50"
       >
         Events
       </a>
@@ -21,39 +24,41 @@
         @if (user.role === 'ORGANIZER') {
           <a
             routerLink="/events/new"
-            routerLinkActive="bg-primary-50 text-primary-700"
-            class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100"
+            routerLinkActive="bg-primary-500/10 text-primary-200 ring-1 ring-inset ring-primary-500/20"
+            class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-300 transition hover:bg-white/5 hover:text-ink-50"
           >
             <lucide-icon [img]="PlusCircleIcon" class="h-4 w-4" />
             <span class="hidden sm:inline">New Event</span>
           </a>
         }
 
-        <div class="mx-1 hidden h-6 w-px bg-gray-200 sm:block"></div>
+        <div class="mx-1 hidden h-6 w-px bg-white/10 sm:block"></div>
 
         <div class="hidden items-center gap-2 sm:flex">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-sm font-semibold text-primary-700">
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-gradient text-sm font-semibold text-white shadow-glow-sm"
+          >
             {{ user.name.charAt(0).toUpperCase() }}
           </span>
-          <span class="text-sm font-medium text-gray-700">{{ user.name }}</span>
+          <span class="text-sm font-medium text-ink-100">{{ user.name }}</span>
         </div>
 
         <button
           type="button"
           (click)="logout()"
           aria-label="Logout"
-          class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100"
+          class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-300 transition hover:bg-rose-500/10 hover:text-rose-300"
         >
           <lucide-icon [img]="LogOutIcon" class="h-4 w-4" />
           <span class="hidden sm:inline">Logout</span>
         </button>
       } @else {
-        <a routerLink="/login" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100">
+        <a routerLink="/login" class="rounded-lg px-3 py-2 text-sm font-medium text-ink-300 transition hover:bg-white/5 hover:text-ink-50">
           Login
         </a>
         <a
           routerLink="/register"
-          class="rounded-lg bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700 hover:shadow-md"
+          class="rounded-lg bg-brand-gradient px-3.5 py-2 text-sm font-semibold text-white shadow-glow-sm transition hover:shadow-glow"
         >
           Sign up
         </a>

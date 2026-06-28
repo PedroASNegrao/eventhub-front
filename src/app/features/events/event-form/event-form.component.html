@@ -1,9 +1,17 @@
-<div class="mx-auto max-w-2xl px-4 py-10 sm:px-6">
-  <h1 class="text-2xl font-bold tracking-tight text-gray-900">Create a new event</h1>
-  <p class="mt-1.5 text-sm text-gray-500">Fill in the details below to publish your event.</p>
+<div class="mx-auto max-w-2xl px-4 py-12 sm:px-6">
+  <span
+    class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-ink-200"
+  >
+    <span class="h-1.5 w-1.5 rounded-full bg-primary-400 shadow-[0_0_8px] shadow-primary-400/70"></span>
+    Organizer tools
+  </span>
+  <h1 class="mt-4 text-3xl font-bold tracking-tight text-ink-50">Create a <span class="text-gradient">new event</span></h1>
+  <p class="mt-2 text-sm text-ink-300">Fill in the details below to publish your event.</p>
 
-  <form [formGroup]="form" (ngSubmit)="submit()" class="card mt-6 animate-fade-in-up space-y-5 p-6 sm:p-8">
-    <div>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="card mt-8 animate-fade-in-up space-y-5 p-6 sm:p-8">
+    <span class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary-600/15 blur-3xl"></span>
+
+    <div class="relative">
       <label for="title" class="input-label">Title</label>
       <input id="title" type="text" formControlName="title" placeholder="e.g. Lisbon Tech Summit" class="input-field" />
       @if (getErrorMessage('title'); as error) {
@@ -11,7 +19,7 @@
       }
     </div>
 
-    <div>
+    <div class="relative">
       <label for="description" class="input-label">Description</label>
       <textarea
         id="description"
@@ -22,7 +30,7 @@
       ></textarea>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <div class="relative grid gap-5 sm:grid-cols-2">
       <div>
         <label for="eventDate" class="input-label">Date and time</label>
         <input id="eventDate" type="datetime-local" formControlName="eventDate" class="input-field" />
@@ -41,9 +49,11 @@
     </div>
 
     @if (serverError()) {
-      <p class="alert-error">{{ serverError() }}</p>
+      <p class="relative alert-error">{{ serverError() }}</p>
     }
 
-    <app-button type="submit" [loading]="loading()" [fullWidth]="true">Publish event</app-button>
+    <div class="relative">
+      <app-button type="submit" [loading]="loading()" [fullWidth]="true">Publish event</app-button>
+    </div>
   </form>
 </div>
