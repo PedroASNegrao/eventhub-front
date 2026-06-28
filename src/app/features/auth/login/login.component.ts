@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LucideAngularModule, CalendarDays } from 'lucide-angular';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { getFirstErrorMessage } from '../../../shared/utils/form-errors.util';
 import { AuthService } from '../../../core/services/auth.service';
@@ -9,7 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, ButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, ButtonComponent, LucideAngularModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -19,6 +20,8 @@ export class LoginComponent {
 
   readonly loading = signal(false);
   readonly serverError = signal<string | null>(null);
+
+  readonly CalendarDaysIcon = CalendarDays;
 
   readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],

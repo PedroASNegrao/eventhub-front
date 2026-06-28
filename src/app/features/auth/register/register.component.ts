@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LucideAngularModule, UserPlus } from 'lucide-angular';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { getFirstErrorMessage } from '../../../shared/utils/form-errors.util';
 import { UserService } from '../../../core/services/user.service';
@@ -10,7 +11,7 @@ import { UserRole } from '../../../core/models/user.model';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, ButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, ButtonComponent, LucideAngularModule],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
@@ -20,6 +21,8 @@ export class RegisterComponent {
 
   readonly loading = signal(false);
   readonly serverError = signal<string | null>(null);
+
+  readonly UserPlusIcon = UserPlus;
 
   readonly roles: { value: UserRole; label: string }[] = [
     { value: 'ATTENDEE', label: 'Attendee — I want to discover and join events' },
