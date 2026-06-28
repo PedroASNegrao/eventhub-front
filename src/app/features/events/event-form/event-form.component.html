@@ -1,0 +1,63 @@
+<div class="mx-auto max-w-2xl px-4 py-8 sm:px-6">
+  <h1 class="text-2xl font-bold text-gray-900">Create a new event</h1>
+  <p class="mt-1 text-sm text-gray-500">Fill in the details below to publish your event.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="mt-6 space-y-4 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-100">
+    <div>
+      <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+      />
+      @if (getErrorMessage('title'); as error) {
+        <p class="mt-1 text-xs text-red-600">{{ error }}</p>
+      }
+    </div>
+
+    <div>
+      <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+      ></textarea>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="eventDate" class="block text-sm font-medium text-gray-700">Date and time</label>
+        <input
+          id="eventDate"
+          type="datetime-local"
+          formControlName="eventDate"
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+        />
+        @if (getErrorMessage('eventDate'); as error) {
+          <p class="mt-1 text-xs text-red-600">{{ error }}</p>
+        }
+      </div>
+
+      <div>
+        <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+        <input
+          id="location"
+          type="text"
+          formControlName="location"
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+        />
+        @if (getErrorMessage('location'); as error) {
+          <p class="mt-1 text-xs text-red-600">{{ error }}</p>
+        }
+      </div>
+    </div>
+
+    @if (serverError()) {
+      <p class="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{{ serverError() }}</p>
+    }
+
+    <app-button type="submit" [loading]="loading()" [fullWidth]="true">Publish event</app-button>
+  </form>
+</div>

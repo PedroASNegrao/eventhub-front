@@ -1,0 +1,39 @@
+<nav class="border-b border-gray-200 bg-white">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+    <a routerLink="/events" class="flex items-center gap-2 text-lg font-bold text-primary-700">
+      <lucide-icon [img]="CalendarDaysIcon" class="h-6 w-6" />
+      EventHub
+    </a>
+
+    <div class="flex items-center gap-3">
+      @if (currentUser$ | async; as user) {
+        @if (user.role === 'ORGANIZER') {
+          <a
+            routerLink="/events/new"
+            routerLinkActive="text-primary-700"
+            class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100"
+          >
+            <lucide-icon [img]="PlusCircleIcon" class="h-4 w-4" />
+            New Event
+          </a>
+        }
+        <span class="hidden text-sm text-gray-500 sm:inline">{{ user.name }}</span>
+        <button
+          type="button"
+          (click)="logout()"
+          class="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100"
+        >
+          <lucide-icon [img]="LogOutIcon" class="h-4 w-4" />
+          Logout
+        </button>
+      } @else {
+        <a routerLink="/login" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100">
+          Login
+        </a>
+        <a routerLink="/register" class="rounded-lg bg-primary-600 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-700">
+          Sign up
+        </a>
+      }
+    </div>
+  </div>
+</nav>

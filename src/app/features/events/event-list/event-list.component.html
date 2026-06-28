@@ -1,0 +1,36 @@
+<div class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+  <h1 class="text-2xl font-bold text-gray-900">Upcoming events</h1>
+  <p class="mt-1 text-sm text-gray-500">Browse what's happening and dive into the details.</p>
+
+  @if (loading()) {
+    <app-spinner />
+  } @else if (error()) {
+    <p class="mt-8 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{{ error() }}</p>
+  } @else if (events().length === 0) {
+    <p class="mt-8 rounded-lg bg-white px-4 py-8 text-center text-sm text-gray-500 ring-1 ring-gray-100">
+      No events have been published yet.
+    </p>
+  } @else {
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      @for (event of events(); track event.id) {
+        <a
+          [routerLink]="['/events', event.id]"
+          class="block rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition hover:shadow-md"
+        >
+          <h2 class="text-lg font-semibold text-gray-900">{{ event.title }}</h2>
+          <p class="mt-2 flex items-center gap-1.5 text-sm text-gray-500">
+            <lucide-icon [img]="CalendarIcon" class="h-4 w-4" />
+            {{ event.eventDate | date: 'medium' }}
+          </p>
+          <p class="mt-1 flex items-center gap-1.5 text-sm text-gray-500">
+            <lucide-icon [img]="MapPinIcon" class="h-4 w-4" />
+            {{ event.location }}
+          </p>
+          <p class="mt-3 text-xs font-medium uppercase tracking-wide text-primary-600">
+            Hosted by {{ event.organizer.name }}
+          </p>
+        </a>
+      }
+    </div>
+  }
+</div>
